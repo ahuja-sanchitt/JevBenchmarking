@@ -59,19 +59,10 @@ def test_history_persists_across_app_instances(settings, make_client):
     assert [r["id"] for r in b.get("/api/history").json()] == [1, 2, 3]
 
 
-def test_projection_ready_after_three_paired_runs(settings, make_client):
+def test_production_numbers_are_not_exposed(settings, make_client):
     client = make_client(settings)
-    for i in range(3):
-        proj = client.get("/api/projection").json()["recat"]
-        assert proj["ready"] is False and proj["openai_monthly"] is None
-        race(client, RECAT)
-    proj = client.get("/api/projection").json()["recat"]
-    assert proj["ready"] is True and proj["paired_runs"] == 3
-    assert proj["jev_monthly"] < proj["openai_monthly"]
-    assert proj["prod_measured_monthly"] == 28.44
-    assert proj["calls_per_month"] == 139 * 30.4
-    assert proj["calibration"]["input_ratio"] == 2100 / 2106
-
+    assert client.get("/api/projection").status_code == 404
+    assert not (settings.data_dir / "workload.json").exists()
 
 def test_provider_failure_has_no_winner(settings, make_client):
     client = make_client(settings, jev=JevMock(fail=True))

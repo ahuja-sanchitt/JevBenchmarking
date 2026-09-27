@@ -114,42 +114,6 @@ def create_app(
         await ready()
         return {f: await db.stats(app.state.engine, f, openai_model) for f in FEATURES}
 
-    @app.get("/api/projection")
-    async def projection():
-        await ready()
-        wl = data.workload
-        out = {}
-        for f in FEATURES:
-            st = await db.stats(app.state.engine, f)
-            prod = wl["features"][f]
-            per_month = prod["calls_per_day"] * wl["days_per_month"]
-            o, j = st["openai"], st["jev"]
-            is_ready = st["paired"] >= 3
-            div = lambda a, b: a / b if a is not None and b else None
-            out[f] = {
-                "ready": is_ready,
-                "paired_runs": st["paired"],
-                "calls_per_month": per_month,
-                "prod_measured_monthly": prod["measured_monthly_cost_usd"],
-                "prod_model": wl.get("model"),
-                "openai_monthly": per_month * o["cost_mean"] if is_ready and o["cost_mean"] is not None else None,
-                "jev_monthly": per_month * j["cost_mean"] if is_ready and j["cost_mean"] is not None else None,
-                "speedup_p50": div(o["ms_p50"], j["ms_p50"]) if is_ready else None,
-                "speedup_p90": div(o["ms_p90"], j["ms_p90"]) if is_ready else None,
-                "cost_ratio": div(o["cost_mean"], j["cost_mean"]) if is_ready else None,
-                "latency_saved_hours": per_month * max(o["ms_p50"] - j["ms_p50"], 0) / 3.6e6 if is_ready else None,
-                "calibration": {
-                    "input_ratio": div(o["prompt_tokens_p50"], prod["avg_input_tokens"]),
-                    "output_ratio": div(o["completion_tokens_p50"], prod["avg_output_tokens"]),
-                    "reasoning_share": div(o["reasoning_tokens_p50"], o["completion_tokens_p50"]),
-                },
-                "agreement": st["agreement"],
-                "jev_faster_share": st["jev_faster_share"],
-                "openai": o,
-                "jev": j,
-            }
-        return out
-
     # ------------------------------------------------------------ the race
     @app.post("/api/race")
     async def race(request: Request):

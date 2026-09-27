@@ -128,7 +128,6 @@ class Settings:
 class Data:
     taxonomy: dict[str, dict[str, list[str]]]
     presets: dict[str, list[dict]]
-    workload: dict
     recat_prompt: str  # system message
     prioritiser_prompt: str  # system message (the response schema is appended, as prod does)
     recat_user_template: str  # user message, {ticket_json}
@@ -157,7 +156,6 @@ def load_data(data_dir: Path = DATA_DIR) -> Data:
     data = Data(
         taxonomy=json.loads(read("taxonomy.json")),
         presets=json.loads(read("presets.json")),
-        workload=json.loads(read("workload.json")),
         recat_prompt=read("recat_prompt.txt"),
         prioritiser_prompt=read("prioritiser_prompt.txt"),
         recat_user_template=read("recat_user_template.txt"),

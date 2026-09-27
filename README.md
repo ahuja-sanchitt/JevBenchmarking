@@ -46,7 +46,7 @@ Frontend only, with no backend and no keys: `node dev-server.mjs`, then open htt
 ## Data
 
 - `data/taxonomy.json` is built from the queries spreadsheet by `scripts/build_taxonomy.py <xlsx>`, which sanitises brand names and merges casing duplicates.
-- `data/presets.json`, `data/workload.json` and the two prompts are edited by hand. The prompts are the production prompts with the brand name removed and `extra_details` dropped.
+- `data/presets.json` and the two prompts are edited by hand. The prompts are the production prompts with the brand name removed and `extra_details` dropped.
 - After changing `data/`, run `node scripts/build_mock_data.mjs` to refresh the frontend mock.
 
 ## Deploy

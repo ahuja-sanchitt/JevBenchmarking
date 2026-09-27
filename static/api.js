@@ -74,7 +74,6 @@ window.API = (() => {
     history: (feature, model, limit = 1000) =>
       getJSON(`/api/history?feature=${encodeURIComponent(feature)}&limit=${limit}` + (model ? `&openai_model=${encodeURIComponent(model)}` : "")),
     stats: (model) => getJSON("/api/stats" + (model ? `?openai_model=${encodeURIComponent(model)}` : "")),
-    projection: () => getJSON("/api/projection"),
     race,
   };
 })();
