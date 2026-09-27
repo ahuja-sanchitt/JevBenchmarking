@@ -28,8 +28,11 @@ NOT_LISTED = "My issue is not listed here"
 
 
 def _env(name: str, default: str | None = None) -> str | None:
+    # Strip: a key pasted into a hosting dashboard often carries a trailing newline or space,
+    # which makes the Authorization header illegal (httpx LocalProtocolError) before any request is sent.
     v = os.environ.get(name)
-    return v if v not in (None, "") else default
+    v = v.strip().strip('"').strip("'").strip() if v is not None else None
+    return v if v else default
 
 
 

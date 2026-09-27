@@ -231,3 +231,12 @@ def test_head_requests_for_uptime_monitors(settings, make_client):
     client = make_client(settings)
     for path in ("/", "/healthz", "/api/stats"):
         assert client.head(path).status_code == 200, path
+
+
+def test_settings_strip_pasted_whitespace_and_quotes(monkeypatch):
+    from app.config import Settings
+    monkeypatch.setenv("OPENAI_API_KEY", "  sk-test-abc\n")
+    monkeypatch.setenv("OPENROUTER_API_KEY", '"sk-or-test"\r\n')
+    monkeypatch.setenv("OPENAI_MODEL", " gpt-4.1 ")
+    s = Settings.from_env()
+    assert (s.openai_api_key, s.openrouter_api_key, s.openai_model) == ("sk-test-abc", "sk-or-test", "gpt-4.1")
