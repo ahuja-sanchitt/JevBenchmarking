@@ -218,3 +218,15 @@ async def rate_check(engine: AsyncEngine, ip_hash: str, limit: int, window_s: fl
             return max(1.0, (oldest + timedelta(seconds=window_s) - now).total_seconds())
         await conn.execute(rate_hits.insert().values(ts=now, ip_hash=ip_hash))
     return None
+
+
+def describe_url(url: str) -> str:
+    """Where a database URL points, without the password: for error messages."""
+    try:
+        u = sa.engine.make_url(normalise_url(url)[0])
+    except Exception as e:
+        return f"DATABASE_URL could not be parsed ({type(e).__name__})"
+    note = ""
+    if (u.host or "").endswith(".supabase.co") and (u.host or "").startswith("db."):
+        note = " (this is Supabase's direct host, which is IPv6-only: use the Session pooler string instead)"
+    return f"driver={u.drivername} host={u.host} port={u.port} user={u.username} database={u.database}{note}"

@@ -41,7 +41,12 @@ def create_app(
             if getattr(app.state, "ready", False):
                 return
             app.state.engine = db.make_engine(settings.database_url)
-            await db.init(app.state.engine)
+            try:
+                await db.init(app.state.engine)
+            except Exception as e:
+                # Say which host/port/user we tried (never the password), so a bad DATABASE_URL is obvious in the logs.
+                log.error("Database connection failed: %s: %s | %s", type(e).__name__, e, db.describe_url(settings.database_url))
+                raise
             app.state.openai = OpenAIClient(settings, openai_transport)
             app.state.jev = JevClient(settings, jev_transport)
             app.state.tasks = set()
