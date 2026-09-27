@@ -74,11 +74,11 @@ def create_app(
         return JSONResponse({"detail": detail}, status_code=status, headers=headers)
 
     # ------------------------------------------------------------ pages
-    @app.get("/", include_in_schema=False)
+    @app.api_route("/", methods=["GET", "HEAD"], include_in_schema=False)
     async def index():
         return FileResponse(STATIC_DIR / "index.html")
 
-    @app.get("/healthz")
+    @app.api_route("/healthz", methods=["GET", "HEAD"])
     async def healthz():
         return {"ok": True}
 
@@ -107,7 +107,7 @@ def create_app(
             return error(400, "unknown feature")
         return await db.history(app.state.engine, feature, limit, openai_model)
 
-    @app.get("/api/stats")
+    @app.api_route("/api/stats", methods=["GET", "HEAD"])  # HEAD: uptime monitors
     async def stats(openai_model: str | None = None):
         await ready()
         return {f: await db.stats(app.state.engine, f, openai_model) for f in FEATURES}

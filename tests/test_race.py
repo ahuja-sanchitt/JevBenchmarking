@@ -225,3 +225,9 @@ def test_works_without_lifespan_and_stores_only_ip_hashes(settings):
     hashes = asyncio.run(stored())
     assert hashes == [db.hash_ip("203.0.113.77", settings.ip_hash_salt)]
     assert "203.0.113.77" not in hashes[0]
+
+
+def test_head_requests_for_uptime_monitors(settings, make_client):
+    client = make_client(settings)
+    for path in ("/", "/healthz", "/api/stats"):
+        assert client.head(path).status_code == 200, path
