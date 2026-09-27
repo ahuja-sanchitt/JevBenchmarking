@@ -1,0 +1,262 @@
+{
+  "Document": {
+    "Car booking agreement": [],
+    "Car delivery note": [],
+    "Need B2B/B2C invoice": [],
+    "Need TCS certificate": [],
+    "Need pollution certificate": []
+  },
+  "Fastag": {
+    "Blacklisted fastag": [],
+    "Fastag deactivation": [],
+    "New fastag": [
+      "Lost/Damaged/Expired",
+      "Not received"
+    ],
+    "New fastag not received": []
+  },
+  "HSRP": {
+    "Color coded sticker not received": [],
+    "Need a new registration number plate": [],
+    "Received a damaged registration number plate": []
+  },
+  "Insurance": {
+    "Claim": [
+      "My issue is not listed here",
+      "Need help with existing claim raised with insurer",
+      "Need inspection report to raise claim with insurer",
+      "Need process related information",
+      "Need to register new claim"
+    ],
+    "Insurance claim request": [],
+    "Insurance renewal": [],
+    "Insurance transfer": [
+      "Initiate insurance transfer",
+      "Transfer initiated but trouble with insurer"
+    ],
+    "Other Requests": [
+      "Cancel insurance policy",
+      "My issue is not listed here",
+      "Need help for endorsement",
+      "Upgrade existing insurance policy"
+    ],
+    "Transfer": [
+      "My issue is not listed here",
+      "Need assistance for insurance transfer",
+      "Need process related information",
+      "Need seller KYC and NOC for insurance transfer"
+    ]
+  },
+  "Miscellaneous": {
+    "Activate DND": [],
+    "Challan": [
+      "My issue is not listed here",
+      "Need assistance with both online and court challans",
+      "Need assistance with court challan",
+      "Need assistance with online challan"
+    ],
+    "Deactivate OEM application": [],
+    "Loans": [],
+    "My issue is not listed here": [],
+    "Need secondary key": []
+  },
+  "Payments": {
+    "Excess amount charged": [
+      "Add details (account holder name, account number, IFSC code)",
+      "My issue is not listed here",
+      "Upload cancelled cheque"
+    ],
+    "Exchange bonus not applied": [],
+    "Loans": []
+  },
+  "Post Return": {
+    "Collect Bank NOC": [],
+    "Hold amount": [],
+    "RC status": [],
+    "Refund not received": []
+  },
+  "RC": {
+    "Incorrect RC details": [],
+    "RC Status": [
+      "Incorrect RC status",
+      "RC transfer is taking too long",
+      "My RC status is incorrect",
+      "My issue is not listed here",
+      "RC transfer status is not available"
+    ],
+    "RTO Receipt": [
+      "My issue is not listed here",
+      "RTO receipt not received",
+      "RTO receipt received with incorrect details"
+    ],
+    "Shipment of physical RC": []
+  },
+  "Buyer Benefits": {
+    "Initiate 5 day money back": [],
+    "Initiate buyback": []
+  },
+  "Warranty": {
+    "Accessories": [
+      "Air Purifier issues",
+      "Toolkit and jack spanner missing"
+    ],
+    "Air conditioning": [
+      "AC control / direction control not working",
+      "AC vent is broken/not working",
+      "Foul smell coming from AC",
+      "My AC is not cooling or cooling less",
+      "My AC is not heating",
+      "Noise from AC",
+      "Water leakage from AC"
+    ],
+    "Brake": [
+      "Brake oil leakage",
+      "Brake pedal goes to floor when pressed",
+      "Handbrake issues",
+      "Hard braking",
+      "Stiff brake pedal"
+    ],
+    "CNG": [
+      "CNG cylinder issues",
+      "Car jerking or stalling"
+    ],
+    "Engine and Transmission": [
+      "Engine is overheating",
+      "Engine light is ON",
+      "Leakage from engine",
+      "Noise or Vibration in Automatic Transmission",
+      "Noise or Vibration in engine"
+    ],
+    "Exteriors": [
+      "Car Logo or Badge issues",
+      "Door handle or switch issues",
+      "Fuel lid issues",
+      "Paint issues",
+      "Rear view mirror issues"
+    ],
+    "Gear or Clutch": [
+      "Clutch is burnt or slipping",
+      "Clutch pedal goes to floor when pressed",
+      "Hard Clutch",
+      "Hard to shift the gears",
+      "Noise from gear",
+      "Unable to engage gear"
+    ],
+    "Interiors": [
+      "Cup holder issues",
+      "Glovebox issues",
+      "Seat belt not working properly",
+      "Sunroof not working properly"
+    ],
+    "Keys or Locks": [
+      "Central locking is not working",
+      "I dont have a secondary key",
+      "My key is not working",
+      "Unable to open the door(s)"
+    ],
+    "Lights": [
+      "Broken or damaged light(s)",
+      "Indicators are not working",
+      "Interior lights are not working",
+      "Light(s) is/are not working",
+      "Warning Lights are ON"
+    ],
+    "Mileage or Pickup": [
+      "Less mileage",
+      "My car has low pickup"
+    ],
+    "Noise": [
+      "AC",
+      "Brakes",
+      "Clutch",
+      "Dashboard",
+      "Door(s)",
+      "Engine",
+      "Gear",
+      "Noise while starting the car",
+      "Side Mirror(s)",
+      "Steering",
+      "Suspension",
+      "Tyres",
+      "Window(s)"
+    ],
+    "Standard Fitment and Features": [
+      "Air purifier issues",
+      "Airbag issues",
+      "Car wiper is not working",
+      "GPS and navigation issues",
+      "Horn not working or sounds faint",
+      "Infotainment system issues",
+      "Instrument cluster issues",
+      "Power socket or USB port not working",
+      "Push-button start not working",
+      "Reverse camera issues",
+      "Speakers not working",
+      "Steering wheel buttons not working",
+      "Window switches are not working",
+      "Wireless charger not working"
+    ],
+    "Suspension and Steering": [
+      "Noise from suspension",
+      "Steering not aligned properly",
+      "Stiff or bouncy suspension"
+    ],
+    "Unable to start Car or Battery": [
+      "Battery is discharged",
+      "Battery warning light is ON",
+      "Car is not starting",
+      "Noise while starting the car"
+    ],
+    "Wheels and Tyres": [
+      "Alloy wheel or rim damaged",
+      "Damaged or defective tyre",
+      "Tyre pressure system issues",
+      "Tyre whobbling while driving",
+      "Wheel alignment issues",
+      "Wheel cover missing or damaged"
+    ]
+  },
+  "Payments - Seller": {
+    "Exchange bonus not received": [],
+    "Issue with amount received": [],
+    "Refund of hold amount": [
+      "OTP / RTO appearance",
+      "Other hold amount"
+    ]
+  },
+  "RC - Seller": {
+    "RC status": [
+      "Incorrect RC status",
+      "My issue is not listed here",
+      "RC transfer is taking too long"
+    ]
+  },
+  "Seller-Miscellaneous": {
+    "Activate DND": [],
+    "Challan": [
+      "Challan notice received post handover",
+      "My issue is not listed here"
+    ],
+    "Documents": [],
+    "Fastag": [
+      "Amount deducted from fastag",
+      "Deactivate fastag",
+      "My issue is not listed here"
+    ],
+    "Forgot item in car": [],
+    "Loan": [
+      "EMI deducted after loan closure",
+      "My issue is not listed here",
+      "Need loan foreclosure document"
+    ],
+    "My issue is not listed here": [
+      "My issue is not listed here"
+    ],
+    "Need Seller Agreement": [],
+    "No Claim Bonus": [
+      "My issue is not listed here",
+      "Need No Claim Bonus certificate",
+      "Reimburse No Claim Bonus"
+    ]
+  }
+}

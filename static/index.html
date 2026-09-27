@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jev for Support Systems</title>
+  <meta name="description" content="Two production support-desk AI features, rebuilt on Jev and raced live against OpenAI. Every timing is measured.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__left">
+      <span class="eyebrow">Jev for Support Systems</span>
+      <span class="topbar__sep" aria-hidden="true"></span>
+      <span class="eyebrow"><span class="c-openai">OpenAI</span> <span class="topbar__vs">vs</span> <span class="c-jev">Jev</span></span>
+    </div>
+    <div class="topbar__right">
+      <span class="eyebrow" id="total-runs">— total runs</span>
+    </div>
+  </header>
+
+  <div class="mock-banner" id="mock-banner" hidden role="status">
+    <strong>Mock data.</strong> No backend is connected, so answers, timings and history are simulated in your browser. Nothing on this screen is a real measurement.
+  </div>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Live benchmark · <span id="hero-models">loading models…</span></p>
+      <h1 id="hero-title">The same support ticket, sent to OpenAI and to Jev at the same instant.</h1>
+      <p class="hero__lede">Two AI features I run in production for a support desk, rebuilt on Jev and raced live against the production prompt on OpenAI. Every timing is measured on the server when you press run. Nothing is scripted or reordered: if OpenAI wins a race, you'll see it.</p>
+      <div class="claims" id="claims" aria-live="polite"></div>
+    </section>
+
+    <!-- Feature toggle -->
+    <nav class="feature-tabs" role="tablist" aria-label="Feature">
+      <button role="tab" class="feature-tab" data-feature="recat" aria-selected="true">
+        <span class="feature-tab__num">01</span> Ticket recategorisation
+      </button>
+      <button role="tab" class="feature-tab" data-feature="prioritiser" aria-selected="false">
+        <span class="feature-tab__num">02</span> Message prioritiser
+      </button>
+    </nav>
+
+    <!-- Explainer -->
+    <section class="panel explainer" id="explainer" aria-live="polite"></section>
+
+    <!-- Input -->
+    <section class="panel input-panel" aria-labelledby="input-label">
+      <form id="race-form" novalidate>
+        <div class="input-row">
+          <label class="field field--grow">
+            <span class="eyebrow" id="input-label">Scenario</span>
+            <select id="preset" class="control"></select>
+          </label>
+          <label class="field field--model">
+            <span class="eyebrow">Race Jev against</span>
+            <select id="model" class="control"></select>
+          </label>
+          <button type="submit" class="btn-run" id="run-btn">
+            <span class="btn-run__icon" aria-hidden="true">▶</span><span class="btn-run__label">Run race</span>
+          </button>
+        </div>
+        <p class="model-note" id="model-note"></p>
+        <div id="fields"></div>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- This run -->
+    <section aria-labelledby="run-title">
+      <h2 class="section-label" id="run-title">This run</h2>
+      <div class="lanes">
+        <article class="card card--openai" id="card-openai" aria-live="polite"></article>
+        <article class="card card--jev" id="card-jev" aria-live="polite"></article>
+      </div>
+      <div class="verdict-row" id="verdict-row" hidden>
+        <div class="panel compare-panel" id="compare-panel"></div>
+        <div class="panel verdict" id="verdict"></div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community" aria-labelledby="community-title">
+      <div class="divider"><span id="community-title">Community data</span></div>
+      <div class="community__head">
+        <div>
+          <p class="eyebrow">Every race anyone has run · <span id="community-feature"></span></p>
+          <p class="community__title" id="community-summary"></p>
+        </div>
+        <div class="seg" role="tablist" aria-label="Metric" id="metric-tabs">
+          <button role="tab" data-metric="latency" aria-selected="true">Latency</button>
+          <button role="tab" data-metric="tokens" aria-selected="false">Tokens</button>
+          <button role="tab" data-metric="cost" aria-selected="false">Cost</button>
+        </div>
+      </div>
+      <div class="tiles" id="community-tiles"></div>
+
+      <div class="panel chart-panel">
+        <div class="chart-panel__head">
+          <h3 class="eyebrow" id="main-chart-title"></h3>
+          <label class="check"><input type="checkbox" id="group-toggle"> Average in groups of 5</label>
+        </div>
+        <p class="chart-note" id="main-chart-note"></p>
+        <div class="chart-box"><canvas id="main-chart" aria-describedby="main-chart-note"></canvas></div>
+      </div>
+
+      <div class="panel chart-panel">
+        <h3 class="eyebrow">Per-run difference · last 60 runs</h3>
+        <p class="chart-note">Each dot is one race. Right of the vertical line: Jev answered first. Above the horizontal line: Jev cost less.</p>
+        <div class="chart-box chart-box--scatter"><canvas id="scatter-chart"></canvas></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer wrap">
+    <p class="muted">Only metrics are stored: timings, token counts and costs. The text you type is never saved. OpenAI cost is computed from list price; Jev cost is reported by OpenRouter.</p>
+  </footer>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="util.js"></script>
+  <script src="mock-data.js"></script>
+  <script src="mock.js"></script>
+  <script src="api.js"></script>
+  <script src="race.js"></script>
+</body>
+</html>

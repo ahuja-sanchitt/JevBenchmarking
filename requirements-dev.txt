@@ -1,0 +1,5 @@
+-r requirements.txt
+uvicorn[standard]
+pytest
+python-dotenv  # scripts/*.py read .env
+openpyxl       # scripts/build_taxonomy.py

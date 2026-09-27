@@ -1,0 +1,14 @@
+# Never upload secrets, private data or local state
+.env
+eval/
+jev_vs_gemini_poc.py
+scripts/out/
+*.db
+.venv/
+__pycache__/
+.pytest_cache/
+# Not needed at runtime
+tests/
+scripts/
+dev-server.mjs
+Dockerfile

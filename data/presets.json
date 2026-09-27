@@ -1,0 +1,91 @@
+{
+  "recat": [
+    {
+      "id": "r1",
+      "label": "AC + smell + suspension noise",
+      "comment": "The AC stopped cooling properly last week and now there's a foul smell whenever I switch it on. The car also makes a knocking noise from the suspension over speed breakers."
+    },
+    {
+      "id": "r2",
+      "label": "RC still in old owner's name",
+      "comment": "It's been 3 weeks since I got the car and the RC still shows the previous owner's name. When will the transfer be done?"
+    },
+    {
+      "id": "r3",
+      "label": "Refund after return",
+      "comment": "I returned the car on the 3rd and still haven't got my refund. This is the second time I'm writing."
+    },
+    {
+      "id": "r4",
+      "label": "Blacklisted fastag",
+      "comment": "Got stopped at the toll plaza today, they said the fastag on my car is blacklisted."
+    },
+    {
+      "id": "r5",
+      "label": "Hinglish: car won't start",
+      "comment": "gaadi subah se start nahi ho rahi, aur dashboard pe battery wali light bhi on hai"
+    },
+    {
+      "id": "r6",
+      "label": "Insurance claim after accident",
+      "comment": "Had a minor accident yesterday and the bumper is damaged. How do I register a claim with the insurer?"
+    },
+    {
+      "id": "r7",
+      "label": "Seller: challan after handover",
+      "comment": "I sold my car to you last month, but today I got a challan for a signal jump dated after the handover."
+    },
+    {
+      "id": "r8",
+      "label": "Too vague to place",
+      "comment": "hello, I need some help with my car"
+    }
+  ],
+  "prioritiser": [
+    {
+      "id": "p1",
+      "label": "Hinglish ack: theek hai",
+      "message": "theek hai"
+    },
+    {
+      "id": "p2",
+      "label": "Consumer court threat",
+      "message": "I will go to consumer court if my refund doesn't come by Friday. This is cheating."
+    },
+    {
+      "id": "p3",
+      "label": "Hinglish callback",
+      "message": "call karo please, baat karni hai"
+    },
+    {
+      "id": "p4",
+      "label": "Status check: kab tak",
+      "message": "any update on my RC? kab tak hoga"
+    },
+    {
+      "id": "p5",
+      "label": "Payment link expiring",
+      "message": "The payment link expires in an hour and it keeps failing, please send a new one right now."
+    },
+    {
+      "id": "p6",
+      "label": "Car won't start",
+      "message": "Car won't start this morning, I'm stuck in the office parking"
+    },
+    {
+      "id": "p7",
+      "label": "Lone thumbs up",
+      "message": "👍"
+    },
+    {
+      "id": "p8",
+      "label": "Hinglish: 2 months, no refund",
+      "message": "2 mahine ho gaye, abhi tak refund nahi aaya"
+    },
+    {
+      "id": "p9",
+      "label": "Spare key missing",
+      "message": "Thanks for the call. One more thing, the spare key wasn't in the car."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "Document": "BUYER",
+  "Fastag": "BUYER",
+  "HSRP": "BUYER",
+  "Insurance": "BUYER",
+  "Miscellaneous": "BUYER",
+  "Payments": "BUYER",
+  "Post Return": "BUYER",
+  "RC": "BUYER",
+  "Buyer Benefits": "BUYER",
+  "Warranty": "BUYER",
+  "Payments - Seller": "SELLER",
+  "RC - Seller": "SELLER",
+  "Seller-Miscellaneous": "SELLER"
+}

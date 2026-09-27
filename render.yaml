@@ -1,0 +1,26 @@
+# Render Blueprint: New → Blueprint → pick this repo. Secrets marked sync: false are asked for at setup.
+services:
+  - type: web
+    name: jev-support-systems
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: DATABASE_URL        # Supabase or Neon pooler connection string; the free web service has no persistent disk
+        sync: false
+      - key: IP_HASH_SALT
+        generateValue: true
+      - key: OPENAI_MODEL
+        value: gpt-4.1
+      - key: DAILY_SPEND_CAP_USD
+        value: "2.00"
+      - key: RATE_LIMIT_PER_HOUR
+        value: "20"

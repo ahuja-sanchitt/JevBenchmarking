@@ -1,0 +1,2 @@
+Customer message:
+{customer_message}

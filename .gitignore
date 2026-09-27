@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.db
+.env
+scripts/out/
+# work-laptop reference only; contains internal code, never commit
+jev_vs_gemini_poc.py
+# real prod tickets for offline evaluation: local only, never commit or publish
+eval/
+# brand-name mapping for scripts/build_taxonomy.py: names the company, never commit
+scripts/renames.local.json

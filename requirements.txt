@@ -1,0 +1,7 @@
+# What the app needs to run (Vercel installs this). Dev and script tools are in requirements-dev.txt.
+fastapi
+httpx
+sqlalchemy[asyncio]>=2.0
+asyncpg
+aiosqlite
+uvicorn
