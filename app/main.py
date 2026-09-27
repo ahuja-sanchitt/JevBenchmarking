@@ -98,6 +98,8 @@ def create_app(
                 "daily_spend_cap_usd": settings.daily_spend_cap_usd,
             },
             "keys_configured": settings.keys_configured,
+            "analytics": {"provider": "umami", "website_id": settings.umami_website_id, "script_url": settings.umami_script_url}
+            if settings.umami_website_id else None,
         }
 
     @app.get("/api/history")

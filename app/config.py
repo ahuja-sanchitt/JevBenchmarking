@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -36,6 +37,16 @@ def _env(name: str, default: str | None = None) -> str | None:
 
 
 
+def _key(name: str) -> str | None:
+    """API keys only ever contain letters, digits, '-' and '_'. Dropping anything else also removes invisible
+    characters (zero-width spaces, non-breaking spaces) that copy-paste can smuggle in and that would make
+    the Authorization header illegal."""
+    v = _env(name)
+    if not v:
+        return None
+    return re.sub(r"[^A-Za-z0-9_\-]", "", v) or None
+
+
 def _float(name: str, default: float | None) -> float | None:
     v = _env(name)
     return float(v) if v is not None else default
@@ -58,6 +69,8 @@ class Settings:
     daily_spend_cap_usd: float = 2.00
     max_input_chars: int = 600
     trust_proxy_headers: bool = True
+    umami_website_id: str | None = None  # page analytics; off unless set
+    umami_script_url: str = "https://cloud.umami.is/script.js"
     ip_hash_salt: str = "jev-race"  # set IP_HASH_SALT in production so stored hashes can't be reversed by brute force
     openai_timeout_s: float = 90
     jev_timeout_s: float = 30
@@ -66,14 +79,14 @@ class Settings:
     @classmethod
     def from_env(cls) -> "Settings":
         return cls(
-            openai_api_key=_env("OPENAI_API_KEY"),
+            openai_api_key=_key("OPENAI_API_KEY"),
             openai_model=_env("OPENAI_MODEL", "gpt-4.1"),
             openai_models=tuple(m.strip() for m in _env("OPENAI_MODELS", "gpt-4.1,gpt-4o-mini,gpt-6-luna,gpt-6-sol").split(",") if m.strip()),
             openai_base_url=_env("OPENAI_BASE_URL", "https://api.openai.com/v1"),
             openai_price_in=_float("OPENAI_PRICE_IN", None),
             openai_price_cached=_float("OPENAI_PRICE_CACHED", None),
             openai_price_out=_float("OPENAI_PRICE_OUT", None),
-            openrouter_api_key=_env("OPENROUTER_API_KEY"),
+            openrouter_api_key=_key("OPENROUTER_API_KEY"),
             openrouter_base_url=_env("OPENROUTER_BASE_URL", "https://openrouter.ai/api"),
             jev_model=_env("JEV_MODEL", "typesafe/jev-1.13"),
             database_url=_env("DATABASE_URL", "sqlite+aiosqlite:///./race.db"),
@@ -82,6 +95,8 @@ class Settings:
             max_input_chars=int(_env("MAX_INPUT_CHARS", "600")),
             trust_proxy_headers=_env("TRUST_PROXY_HEADERS", "1") not in ("0", "false", "False"),
             ip_hash_salt=_env("IP_HASH_SALT", "jev-race"),
+            umami_website_id=_env("UMAMI_WEBSITE_ID"),
+            umami_script_url=_env("UMAMI_SCRIPT_URL", "https://cloud.umami.is/script.js"),
             openai_timeout_s=float(_env("OPENAI_TIMEOUT_S", "90")),
             jev_timeout_s=float(_env("JEV_TIMEOUT_S", "30")),
             data_dir=Path(_env("DATA_DIR", str(DATA_DIR))),

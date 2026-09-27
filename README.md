@@ -74,6 +74,10 @@ Any other host that runs the Dockerfile (e.g. Railway) works the same way.
 
 Either way, set a hard monthly budget on the OpenAI and OpenRouter dashboards as well as `DAILY_SPEND_CAP_USD`.
 
+## Analytics
+
+Optional and off by default. Set `UMAMI_WEBSITE_ID` (from a free Umami Cloud site) and the page loads Umami, which is cookieless and stores no personal data. It shows visitors, page views, referrers and countries, plus one event, `race_run` (feature, model, preset or "custom"), and `race_blocked` when the rate limit or budget stops a race. Events never carry text a visitor typed. Mock mode never sends analytics.
+
 ## Honesty rules
 
 1. Timings and arrival order are measured, never scripted or padded.

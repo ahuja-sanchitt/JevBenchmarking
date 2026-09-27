@@ -36,6 +36,7 @@
       return;
     }
     S.leafSet = new Set(leaves(S.cfg.taxonomy).map(leafKey));
+    Analytics.init(S.cfg.analytics);
     const models = S.cfg.openai_models || [S.cfg.openai_model];
     let saved = null;
     try { saved = localStorage.getItem(MODEL_KEY); } catch {}
@@ -278,6 +279,7 @@
 
     setRunning(true);
     S.run = { request: body, results: {}, done: null };
+    const meta = { feature: body.feature, model: body.openai_model, preset: body.preset_id || "custom" };
     $("verdict-row").hidden = true;
     $("run-title").textContent = "This run";
 
@@ -287,6 +289,7 @@
     } catch (e) {
       const prefix = e.status === 429 ? "" : e.status === 503 ? "Unavailable: " : e.status === 400 ? "Check the input: " : "Race failed: ";
       showFormError(prefix + e.message + (e.status === 429 ? retryText(e.retryAfter) : ""));
+      Analytics.track("race_blocked", { ...meta, status: e.status || 0 });
       if (!Object.keys(S.run.results).length) renderIdleCards();
     } finally {
       setRunning(false);
@@ -320,6 +323,7 @@
       if (S.statsAll[S.feature]) S.statsAll[S.feature].runs += 1;
       PROVIDERS.forEach((p) => S.run.results[p] && renderResultCard(p));
       renderVerdict();
+      Analytics.track("race_run", { feature: S.feature, model: S.run.request.openai_model, preset: S.run.request.preset_id || "custom" });
       renderClaims();
       renderTotals();
       renderCommunity();

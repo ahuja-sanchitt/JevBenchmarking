@@ -236,7 +236,13 @@ def test_head_requests_for_uptime_monitors(settings, make_client):
 def test_settings_strip_pasted_whitespace_and_quotes(monkeypatch):
     from app.config import Settings
     monkeypatch.setenv("OPENAI_API_KEY", "  sk-test-abc\n")
-    monkeypatch.setenv("OPENROUTER_API_KEY", '"sk-or-test"\r\n')
+    monkeypatch.setenv("OPENROUTER_API_KEY", '"sk-or-​test "\r\n')  # zero-width space, non-breaking space
     monkeypatch.setenv("OPENAI_MODEL", " gpt-4.1 ")
     s = Settings.from_env()
     assert (s.openai_api_key, s.openrouter_api_key, s.openai_model) == ("sk-test-abc", "sk-or-test", "gpt-4.1")
+
+
+def test_analytics_config_only_when_set(settings, make_client):
+    assert make_client(settings).get("/api/config").json()["analytics"] is None
+    cfg = make_client(replace(settings, umami_website_id="abc-123")).get("/api/config").json()["analytics"]
+    assert cfg == {"provider": "umami", "website_id": "abc-123", "script_url": "https://cloud.umami.is/script.js"}

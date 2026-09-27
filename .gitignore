@@ -10,3 +10,5 @@ jev_vs_gemini_poc.py
 eval/
 # brand-name mapping for scripts/build_taxonomy.py: names the company, never commit
 scripts/renames.local.json
+# social-media recordings from scripts/record_demo.py
+media/
