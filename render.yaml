@@ -4,6 +4,7 @@ services:
     name: jev-support-systems
     runtime: python
     plan: free
+    region: singapore   # closest Render region to the Supabase project (Tokyo)
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
